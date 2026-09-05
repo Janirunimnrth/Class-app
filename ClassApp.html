@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Live Classroom App</title>
+    <script src="https://meet.jit.si/external_api.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #111; }
+        #meeting-container { width: 100vw; height: 100vh; }
+    </style>
+</head>
+<body>
+    <div id="meeting-container"></div>
+    <script>
+        window.onload = () => {
+            const domain = 'meet.jit.si';
+            const options = {
+                roomName: 'MyClassroom_' + Math.floor(Math.random() * 10000),
+                width: '100%',
+                height: '100%',
+                parentNode: document.querySelector('#meeting-container'),
+                userInfo: { displayName: 'ගුරුතුමා / Host' },
+                configOverwrite: {
+                    startWithAudioMuted: false,
+                    startWithVideoMuted: false,
+                    prejoinPageEnabled: false
+                },
+                interfaceConfigOverwrite: {
+                    TOOLBAR_BUTTONS: [
+                        'microphone', 'camera', 'desktop', 'embedmeeting', 'fullscreen',
+                        'fodeviceselection', 'hangup', 'chat', 'recording', 'livestreaming',
+                        'etherpad', 'sharedvideo', 'settings', 'raisehand', 'videoquality',
+                        'filmstrip', 'invite', 'tileview', 'videobackgroundblur',
+                        'mute-everyone', 'security'
+                    ]
+                }
+            };
+            const api = new JitsiMeetExternalAPI(domain, options);
+        };
+    </script>
+</body>
+</html>
